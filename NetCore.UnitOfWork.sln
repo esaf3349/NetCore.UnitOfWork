@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore.UnitOfWork.Interfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore.UnitOfWork.Core", "Source\NetCore.UnitOfWork.Core\NetCore.UnitOfWork.Core.csproj", "{EA06C86C-93DC-4443-87BC-8DD3F0620FCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore.UnitOfWork.EntityFramework", "Source\NetCore.UnitOfWork.EntityFramework\NetCore.UnitOfWork.EntityFramework.csproj", "{DE7486E1-E444-4127-8933-B3FD4304D53F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{EA06C86C-93DC-4443-87BC-8DD3F0620FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA06C86C-93DC-4443-87BC-8DD3F0620FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA06C86C-93DC-4443-87BC-8DD3F0620FCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE7486E1-E444-4127-8933-B3FD4304D53F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7486E1-E444-4127-8933-B3FD4304D53F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7486E1-E444-4127-8933-B3FD4304D53F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7486E1-E444-4127-8933-B3FD4304D53F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 		{4545E8D9-9FA0-4DA7-8B15-28FCD48C4B66} = {2F665812-106C-4B0D-8E3A-83E0E7F7BF32}
 		{6F58C287-3D06-4A86-9CBA-37CA3153297F} = {2F665812-106C-4B0D-8E3A-83E0E7F7BF32}
 		{EA06C86C-93DC-4443-87BC-8DD3F0620FCE} = {2F665812-106C-4B0D-8E3A-83E0E7F7BF32}
+		{DE7486E1-E444-4127-8933-B3FD4304D53F} = {2F665812-106C-4B0D-8E3A-83E0E7F7BF32}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {231E76EE-50EC-4267-9D49-A246018715FB}
