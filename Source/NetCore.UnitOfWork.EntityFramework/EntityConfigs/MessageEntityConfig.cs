@@ -15,6 +15,16 @@ namespace NetCore.UnitOfWork.EntityFramework.EntityConfigs
                 .HasColumnType("nvarchar(100)")
                 .HasMaxLength(100)
                 .IsRequired();
+
+            builder.HasOne(d => d.Chat)
+                .WithMany(o => o.Messages)
+                .HasForeignKey(d => d.ChatId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(d => d.Sender)
+                .WithMany(o => o.Messages)
+                .HasForeignKey(d => d.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
