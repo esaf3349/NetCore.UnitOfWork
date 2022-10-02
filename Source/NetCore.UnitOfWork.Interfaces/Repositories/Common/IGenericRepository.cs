@@ -1,11 +1,12 @@
-﻿using System;
+﻿using NetCore.UnitOfWork.Core.Entities.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace NetCore.UnitOfWork.Interfaces.Repositories.Common
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : IntKeyEntity
     {
         Task<bool> Add(T entity);
         Task<bool> Update(T entity);
