@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace NetCore.UnitOfWork.Interfaces.Repositories.Common
 {
-    public interface IGenericRepository<T> where T : IntKeyEntity
+    public interface IGenericRepository<TEntity> where TEntity : IntKeyEntity
     {
-        Task<bool> Add(T entity);
-        Task<bool> Update(T entity);
+        Task<bool> Add(TEntity entity);
+        Task<bool> Update(TEntity entity);
         Task<bool> Delete(int id);
-        Task<T> Get(int id);
-        Task<IEnumerable<T>> Get(Expression<Func<T, bool>> filter, int take, int offset);
+        Task<TEntity> Get(int id);
+        Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>> filter, int pageNumber, int pageSize);
     }
 }

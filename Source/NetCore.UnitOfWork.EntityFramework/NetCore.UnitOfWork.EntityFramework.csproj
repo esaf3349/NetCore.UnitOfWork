@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NetCore.UnitOfWork.Core\NetCore.UnitOfWork.Core.csproj" />
+    <ProjectReference Include="..\NetCore.UnitOfWork.Interfaces\NetCore.UnitOfWork.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
