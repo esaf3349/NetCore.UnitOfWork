@@ -11,13 +11,13 @@ namespace NetCore.UnitOfWork.EntityFramework.Repositories.Common
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : IntKeyEntity
     {
-        protected AppDbContext Context;
+        protected AppDbContext DbContext;
         protected DbSet<TEntity> DbSet;
 
-        public GenericRepository(AppDbContext context)
+        public GenericRepository(AppDbContext dbContext)
         {
-            Context = context;
-            DbSet = context.Set<TEntity>();
+            DbContext = dbContext;
+            DbSet = dbContext.Set<TEntity>();
         }
 
         public virtual async Task<bool> Add(TEntity entity)

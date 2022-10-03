@@ -6,7 +6,7 @@ namespace NetCore.UnitOfWork.EntityFramework.Repositories
 {
     public class ChatRepository : GenericRepository<Chat>, IChatRepository
     {
-        public ChatRepository(AppDbContext context) : base(context) 
+        public ChatRepository(AppDbContext dbContext) : base(dbContext) 
         {
 
         }

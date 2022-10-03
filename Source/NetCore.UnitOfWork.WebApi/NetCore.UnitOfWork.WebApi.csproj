@@ -8,5 +8,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NetCore.UnitOfWork.EntityFramework\NetCore.UnitOfWork.EntityFramework.csproj" />
+    <ProjectReference Include="..\NetCore.UnitOfWork.Interfaces\NetCore.UnitOfWork.Interfaces.csproj" />
+  </ItemGroup>
+
 
 </Project>

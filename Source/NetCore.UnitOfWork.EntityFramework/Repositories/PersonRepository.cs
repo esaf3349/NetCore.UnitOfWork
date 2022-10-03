@@ -6,7 +6,7 @@ namespace NetCore.UnitOfWork.EntityFramework.Repositories
 {
     public class PersonRepository : GenericRepository<Person>, IPersonRepository
     {
-        public PersonRepository(AppDbContext context) : base(context)
+        public PersonRepository(AppDbContext dbContext) : base(dbContext)
         {
 
         }
