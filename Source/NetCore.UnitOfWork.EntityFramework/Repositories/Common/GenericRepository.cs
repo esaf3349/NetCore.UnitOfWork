@@ -31,10 +31,10 @@ namespace NetCore.UnitOfWork.EntityFramework.Repositories.Common
         {
             var existingEntity = await DbSet.Where(x => x.Id == entity.Id).FirstOrDefaultAsync();
 
-            if (existingEntity != null)
+            if (existingEntity == null)
                 return false;
 
-            DbSet.Update(entity);
+            DbContext.Entry(existingEntity).CurrentValues.SetValues(entity);
 
             return true;
         }
@@ -56,7 +56,7 @@ namespace NetCore.UnitOfWork.EntityFramework.Repositories.Common
             return await DbSet.FindAsync(id);
         }
 
-        public virtual async Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>> filter, int pageNumber = 1, int pageSize = 20)
+        public virtual async Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>> filter, int pageNumber, int pageSize)
         {
             return await DbSet.Where(filter).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         }
