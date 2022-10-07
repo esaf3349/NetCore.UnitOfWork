@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NetCore.UnitOfWork.EntityFramework;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace NetCore.UnitOfWork.WebApi
 {
@@ -21,10 +22,16 @@ namespace NetCore.UnitOfWork.WebApi
             services.AddControllers();
 
             services.AddAppDatabase(Configuration.GetConnectionString("AppDbConnection"));
+
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+
+            app.UseSwaggerUI();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
