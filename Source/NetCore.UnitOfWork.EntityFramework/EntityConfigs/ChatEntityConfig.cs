@@ -5,7 +5,7 @@ using NetCore.UnitOfWork.EntityFramework.EntityConfigs.Common;
 
 namespace NetCore.UnitOfWork.EntityFramework.EntityConfigs
 {
-    public class ChatEntityConfig : IntKeyEntityConfig<Chat>
+    public class ChatEntityConfig : SoftDeleteEntityConfig<Chat>
     {
         public override void Configure(EntityTypeBuilder<Chat> builder)
         {

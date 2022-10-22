@@ -5,7 +5,7 @@ using NetCore.UnitOfWork.EntityFramework.EntityConfigs.Common;
 
 namespace NetCore.UnitOfWork.EntityFramework.EntityConfigs
 {
-    public class MessageEntityConfig : IntKeyEntityConfig<Message>
+    public class MessageEntityConfig : SoftDeleteEntityConfig<Message>
     {
         public override void Configure(EntityTypeBuilder<Message> builder)
         {

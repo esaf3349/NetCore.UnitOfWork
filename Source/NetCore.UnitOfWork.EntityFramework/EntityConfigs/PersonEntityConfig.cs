@@ -5,7 +5,7 @@ using NetCore.UnitOfWork.EntityFramework.EntityConfigs.Common;
 
 namespace NetCore.UnitOfWork.EntityFramework.EntityConfigs
 {
-    public class PersonEntityConfig : IntKeyEntityConfig<Person>
+    public class PersonEntityConfig : SoftDeleteEntityConfig<Person>
     {
         public override void Configure(EntityTypeBuilder<Person> builder)
         {

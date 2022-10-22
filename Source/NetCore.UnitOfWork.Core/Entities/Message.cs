@@ -3,7 +3,7 @@ using System;
 
 namespace NetCore.UnitOfWork.Core.Entities
 {
-    public class Message : IntKeyEntity
+    public class Message : SoftDeleteEntity
     {
         public string Content { get; set; }
         public int ChatId { get; set; }

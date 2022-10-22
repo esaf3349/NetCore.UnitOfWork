@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NetCore.UnitOfWork.Core.Entities
 {
-    public class Person : IntKeyEntity
+    public class Person : SoftDeleteEntity
     {
         public Person()
         {
