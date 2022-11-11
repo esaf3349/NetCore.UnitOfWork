@@ -14,5 +14,13 @@ namespace NetCore.UnitOfWork.EntityFramework
 
             return services;
         }
+
+        public static void ApplyAppDatabaseMigrations(this IServiceScope serviceScope)
+        {
+            using (var context = serviceScope.ServiceProvider.GetService<AppDbContext>())
+            {
+                context.Database.Migrate();
+            }
+        }
     }
 }

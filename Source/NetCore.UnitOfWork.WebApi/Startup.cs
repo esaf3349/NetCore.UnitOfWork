@@ -47,6 +47,11 @@ namespace NetCore.UnitOfWork.WebApi
             {
                 endpoints.MapControllers();
             });
+
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ApplyAppDatabaseMigrations();
+            }
         }
     }
 }
