@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NetCore.UnitOfWork.Core.Entities;
 using NetCore.UnitOfWork.Interfaces;
 using NetCore.UnitOfWork.WebApi.Common.Pagination;
@@ -10,18 +11,20 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
     [Route("api/[controller]")]
     public class PersonsController : ControllerBase
     {
-        private IUnitOfWork _uow { get; set; }
+        private readonly IUnitOfWork Uow;
+        private readonly ILogger<PersonsController> Logger;
 
-        public PersonsController(IUnitOfWork uow)
+        public PersonsController(IUnitOfWork uow, ILogger<PersonsController> logger)
         {
-            _uow = uow;
+            Uow = uow;
+            Logger = logger;
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var person = await _uow.Persons.Get(id);
+            var person = await Uow.Persons.Get(id);
 
             return Ok(person);
         }
@@ -30,7 +33,7 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("get")]
         public async Task<IActionResult> Get([FromQuery] PageParams page)
         {
-            var persons = await _uow.Persons.Get(c => true, page.PageNumber, page.PageSize);
+            var persons = await Uow.Persons.Get(c => true, page.PageNumber, page.PageSize);
 
             return Ok(persons);
         }
@@ -39,8 +42,8 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("add")]
         public async Task<IActionResult> Add([FromBody] Person person)
         {
-            await _uow.Persons.Add(person);
-            await _uow.Commit();
+            await Uow.Persons.Add(person);
+            await Uow.Commit();
 
             return Ok();
         }
@@ -49,8 +52,8 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("update")]
         public async Task<IActionResult> Update([FromBody] Person person)
         {
-            await _uow.Persons.Update(person);
-            await _uow.Commit();
+            await Uow.Persons.Update(person);
+            await Uow.Commit();
 
             return Ok();
         }
@@ -59,8 +62,8 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("{id:int}/delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _uow.Persons.Delete(id);
-            await _uow.Commit();
+            await Uow.Persons.Delete(id);
+            await Uow.Commit();
 
             return Ok();
         }

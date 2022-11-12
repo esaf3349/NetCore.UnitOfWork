@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NetCore.UnitOfWork.Core.Entities;
 using NetCore.UnitOfWork.Interfaces;
 using NetCore.UnitOfWork.WebApi.Common.Pagination;
@@ -10,18 +11,20 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
     [Route("api/[controller]")]
     public class ChatsController : ControllerBase
     {
-        private IUnitOfWork _uow { get; set; }
+        private readonly IUnitOfWork Uow;
+        private readonly ILogger<ChatsController> Logger;
 
-        public ChatsController(IUnitOfWork uow)
+        public ChatsController(IUnitOfWork uow, ILogger<ChatsController> logger)
         {
-            _uow = uow;
+            Uow = uow;
+            Logger = logger;
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var chat = await _uow.Chats.Get(id);
+            var chat = await Uow.Chats.Get(id);
 
             return Ok(chat);
         }
@@ -30,7 +33,7 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("get")]
         public async Task<IActionResult> Get([FromQuery] PageParams page)
         {
-            var chats = await _uow.Chats.Get(c => true, page.PageNumber, page.PageSize);
+            var chats = await Uow.Chats.Get(c => true, page.PageNumber, page.PageSize);
 
             return Ok(chats);
         }
@@ -39,8 +42,8 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("add")]
         public async Task<IActionResult> Add([FromBody] Chat chat)
         {
-            await _uow.Chats.Add(chat);
-            await _uow.Commit();
+            await Uow.Chats.Add(chat);
+            await Uow.Commit();
 
             return Ok();
         }
@@ -49,8 +52,8 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("update")]
         public async Task<IActionResult> Update([FromBody] Chat chat)
         {
-            await _uow.Chats.Update(chat);
-            await _uow.Commit();
+            await Uow.Chats.Update(chat);
+            await Uow.Commit();
 
             return Ok();
         }
@@ -59,8 +62,8 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("{id:int}/delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _uow.Chats.Delete(id);
-            await _uow.Commit();
+            await Uow.Chats.Delete(id);
+            await Uow.Commit();
 
             return Ok();
         }

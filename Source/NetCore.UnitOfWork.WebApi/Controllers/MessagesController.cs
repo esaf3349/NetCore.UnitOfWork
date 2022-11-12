@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NetCore.UnitOfWork.Core.Entities;
 using NetCore.UnitOfWork.Interfaces;
 using NetCore.UnitOfWork.WebApi.Common.Pagination;
@@ -10,18 +11,20 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
     [Route("api/[controller]")]
     public class MessagesController : ControllerBase
     {
-        private IUnitOfWork _uow { get; set; }
+        private readonly IUnitOfWork Uow;
+        private readonly ILogger<MessagesController> Logger;
 
-        public MessagesController(IUnitOfWork uow)
+        public MessagesController(IUnitOfWork uow, ILogger<MessagesController> logger)
         {
-            _uow = uow;
+            Uow = uow;
+            Logger = logger;
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var message = await _uow.Messages.Get(id);
+            var message = await Uow.Messages.Get(id);
 
             return Ok(message);
         }
@@ -30,7 +33,7 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("/api/chats/{chatId:int}/messages")]
         public async Task<IActionResult> Get(int chatId, [FromQuery] PageParams page)
         {
-            var messages = await _uow.Messages.Get(c => c.ChatId == chatId, page.PageNumber, page.PageSize);
+            var messages = await Uow.Messages.Get(c => c.ChatId == chatId, page.PageNumber, page.PageSize);
 
             return Ok(messages);
         }
@@ -39,8 +42,8 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("add")]
         public async Task<IActionResult> Add([FromBody] Message message)
         {
-            await _uow.Messages.Add(message);
-            await _uow.Commit();
+            await Uow.Messages.Add(message);
+            await Uow.Commit();
 
             return Ok();
         }
@@ -49,8 +52,8 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("update")]
         public async Task<IActionResult> Update([FromBody] Message message)
         {
-            await _uow.Messages.Update(message);
-            await _uow.Commit();
+            await Uow.Messages.Update(message);
+            await Uow.Commit();
 
             return Ok();
         }
@@ -59,8 +62,8 @@ namespace NetCore.UnitOfWork.WebApi.Controllers
         [Route("{id:int}/delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _uow.Messages.Delete(id);
-            await _uow.Commit();
+            await Uow.Messages.Delete(id);
+            await Uow.Commit();
 
             return Ok();
         }
